@@ -1,0 +1,20 @@
+CIUDADES
+nombre
+pais
+
+
+PERSONAS
+nombre
+apellido
+birthdate
+
+
+HISTORIAS
+ref: persona
+ref: ciudad
+text
+category
+
+1- Get Ciudades.
+2- Get Historias de personas de esa ciudad
+3- Get texto de la historia.
