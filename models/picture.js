@@ -1,5 +1,6 @@
 "use strict";
 module.exports = function(sequelize, DataTypes) {
+  var _ = require("lodash");
   var multer = require("multer");
   var Picture = sequelize.define("picture", {
     url: DataTypes.STRING
@@ -9,11 +10,12 @@ module.exports = function(sequelize, DataTypes) {
         Picture.belongsTo(models.city);
         Picture.belongsTo(models.person);
       },
-      mapValues: (pictures, cityId) => {
+      mapValues: (pictures, id) => {
         pictures = pictures || [];
-        var a = pictures.map((picture) => {return {url: picture.path, cityId}});
-        console.log(a);
-        return a;
+        return pictures.map((picture) => {
+          let pic = {url: picture.path};
+          return _.merge(pic, id)
+        });
       }
     }
   });

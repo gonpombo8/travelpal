@@ -23,7 +23,7 @@ var models = require("./models");
 var app = express();
 var server = require('http').createServer(app);
 require('./config/express')(app);
-require('./routes/index')(app);
+require('./routes/index.route')(app);
 // Start server
 models.sequelize.sync().then(() => {
   server.listen(config.port, config.ip, function () {

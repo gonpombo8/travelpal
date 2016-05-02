@@ -17,12 +17,12 @@
 
  module.exports = function(app) {
   var env = app.get('env');
-
   app.use(compression());
   app.use(bodyParser.urlencoded({ extended: true }));
   app.use(bodyParser.json());
   app.use(methodOverride());
   app.use(cookieParser());
+  app.use('/public', express.static(path.join(config.root, 'public')));
   app.use(morgan('dev'));   
   app.use(errorHandler()); // Error handler - has to be last
   

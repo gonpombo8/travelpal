@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 module.exports = function(sequelize, DataTypes) {
   var City = sequelize.define("city", {
@@ -10,9 +10,11 @@ module.exports = function(sequelize, DataTypes) {
         City.hasMany(models.history);
         City.hasMany(models.picture);
       },
-      withPictures: () => {
-        const Picture = require('../models').picture
-        return City.findAll({include: Picture}).then(cities => {
+      withPictures: (params) => {
+        let query = require('../services/query')(params); 
+        const Picture = require('../models').picture;
+        query.include = Picture;
+        return City.findAll(query).then(cities => {
           cities = JSON.parse(JSON.stringify(cities));
           return cities.map(city => {
             city.pictures = city.pictures.map(picture => picture.url);

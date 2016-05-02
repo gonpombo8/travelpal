@@ -5,7 +5,7 @@ var Picture = models.picture;
 var citiesController = () => {
   var index = (req, res, next) => {
     City
-    .withPictures()
+    .withPictures(req.query)
     .then(city => {
       res.send(city)
     });
@@ -15,9 +15,8 @@ var citiesController = () => {
     city
       .save()
       .then((city) => {
-        console.log(city.dataValues.id)
         Picture
-          .bulkCreate(Picture.mapValues(req.files, city.dataValues.id))
+          .bulkCreate(Picture.mapValues(req.files, {cityId: city.dataValues.id}))
           .then((picture) => {
             res.send(200);
           })
