@@ -8,7 +8,6 @@ var parse = (params) => {
   return response;
 }
 var offset = (params) => {
-  console.log(params)
   return params.page ? ((params.page - 1) * (params.perPage || 20)) : 0; 
 }
 var where = (params) => {
