@@ -9,6 +9,7 @@ module.exports = function(sequelize, DataTypes) {
       associate: (models) => {
         Picture.belongsTo(models.city);
         Picture.belongsTo(models.person);
+        Picture.belongsTo(models.history);
       },
       mapValues: (pictures, id) => {
         pictures = pictures || [];

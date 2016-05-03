@@ -18,3 +18,12 @@ category
 1- Get Ciudades.
 2- Get Historias de personas de esa ciudad
 3- Get texto de la historia.
+
+
+====== SEED =====
+- Person
+name=Juan&lastName=Carpapete&profession=Developer&brief=Soy un programador&nationality=Argentina&birthdate=Mon Oct 02 1989 00:00:00 GMT-0300 (ART)&twitter=jotasio&instagram=jcarpanelli
+- City
+name=Buenos Aires&country=Argentina
+- History
+body=Boca vigilante&title=Boca&subTitle=Vigilante&category=Sport&cityId=1&personId=2

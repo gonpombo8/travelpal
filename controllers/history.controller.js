@@ -15,11 +15,19 @@ var citiesController = () => {
     history
       .save()
       .then((history) => {
-        res.send(history);
+        Picture
+          .bulkCreate(Picture.mapValues(req.files, {historyId: history.dataValues.id}))
+          .then((picture) => {
+            res.send(history);
+          })
+          .catch((err) => {
+            console.log("[ERROR][createPictureCity]", err.stack);
+            res.send(500, "City picture create error");
+          })
       })
       .catch((err) => {
         console.log("[ERROR][createHistory]", err.stack);
-        res.status(500).send("Picture create error");
+        res.send(500, "Picture create error");
       });
   }
   return {

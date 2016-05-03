@@ -1,15 +1,19 @@
 'use strict';
 var parse = (params) => {
-  let response = {where: {}, limit: 20};
-  for(var i in params) {
-    if(Array.isArray(params[i])) {
-      response.where[i] = {$in: params[i]};
-    } else if(i === "page") {
-      response.offset = (params[i] - 1) * 20;
-    } else {
-      response.where[i] = params[i];
-    }
-  }
+  let response = {
+    limit: params.perPage || 20,
+    offset: offset(params),
+    where: where(params)
+  };
   return response;
+}
+var offset = (params) => {
+  console.log(params)
+  return params.page ? ((params.page - 1) * (params.perPage || 20)) : 0; 
+}
+var where = (params) => {
+  delete params.page;
+  delete params.perPage;
+  return params;
 }
 module.exports = parse;
