@@ -7,7 +7,6 @@ var basename  = path.basename(module.filename);
 var env       = process.env.NODE_ENV || 'development';
 var config    = require(__dirname + '/../config/config.json')[env];
 var db        = {};
-console.log(process)
 if (process.env.HEROKU_POSTGRESQL_CRIMSON_URL) {
 	sequelize = new Sequelize(process.env.HEROKU_POSTGRESQL_CRIMSON_URL, {
 		logging: false,
