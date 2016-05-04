@@ -17,5 +17,5 @@ var upload = multer({storage: storage})
 
 router
   .get('/', controller.index)
-  .post('/', upload.array("pictures"), controller.create);
+  // .post('/', upload.array("pictures"), controller.create);
 module.exports = router;
