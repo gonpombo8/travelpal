@@ -13,23 +13,17 @@ var personController = () => {
   var create = (req, res, next) => {
     var person = Person.build(req.body);
     person
-      .save()
-      .then((person) => {
-        console.log(person.dataValues.id)
-        Picture
-          .bulkCreate(Picture.mapValues(req.files, {personId: person.dataValues.id}))
-          .then((picture) => {
-            res.send(200);
-          })
-          .catch((err) => {
-            console.log("[ERROR][createPicturePerson]", err.stack);
-            res.send(500, "Person picture create error");
-          })
-      })
-      .catch((err) => {
-        console.log("[ERROR][createPerson]", err.stack);
-        res.status(500).send("Picture create error");
-      });
+    .save()
+    .then((person) => {
+      return Picture.bulkCreate(Picture.mapValues(req.files, {personId: person.dataValues.id}));
+    })
+    .then((picture) => {
+      res.send(200);
+    })
+    .catch((err) => {
+      console.log("[ERROR][createPerson]", err.stack);
+      res.status(500).send("Picture create error");
+    });
   }
   return {
     index: index,

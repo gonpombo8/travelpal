@@ -13,22 +13,17 @@ var citiesController = () => {
   var create = (req, res, next) => {
     var city = City.build(req.body);
     city
-      .save()
-      .then((city) => {
-        Picture
-          .bulkCreate(Picture.mapValues(req.files, {cityId: city.dataValues.id}))
-          .then((picture) => {
-            res.send(200);
-          })
-          .catch((err) => {
-            console.log("[ERROR][createPictureCity]", err.stack);
-            res.send(500, "City picture create error");
-          })
-      })
-      .catch((err) => {
-        console.log("[ERROR][createCity]", err.stack);
-        res.status(500).send("Picture create error");
-      });
+    .save()
+    .then((city) => {
+      return Picture.bulkCreate(Picture.mapValues(req.files, {cityId: city.dataValues.id}))
+    })
+    .then((picture) => {
+      res.send(picture);
+    })
+    .catch((err) => {
+      console.log("[ERROR][createCity]", err.stack);
+      res.status(500).send("Picture create error");
+    });
   }
   return {
     index: index,
