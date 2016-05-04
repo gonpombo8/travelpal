@@ -16,7 +16,6 @@ process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 var express = require('express');
 var config = require('./config/environment');
 var models = require("./models");
-
 // if(config.seedDB) { require('./config/seed'); }
 
 // Setup server
